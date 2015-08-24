@@ -33,7 +33,7 @@ class DB {
 				if ($_REQUEST['subtables'][$f_result]['subtable']) {
 					$fields[$f_result] = array(
 						'subtable'=>$_REQUEST['subtables'][$f_result]['subtable'],
-						'subtable_fields'=>$_REQUEST['subtables'][$f_result]['subtable_fieldls'],
+						'subtable_fields'=>$_REQUEST['subtables'][$f_result]['subtable_fields'],
 						'f_id_field'=>$_REQUEST['subtables'][$f_result]['f_id_field'],
 						'filter_result'=>1,
 						'f_value'=>$f_value['results']
@@ -1046,7 +1046,7 @@ class DB {
 			foreach ($result as $row) {
 				$row = array_values($row);
 				if ($row[0] != $table) {
-					$subtable = str_ireplace("{$table}_",'',$row[0]);
+					$subtable = preg_replace('/'.$table.'\_/','',$row[0],1);
 					$subtables[] = $subtable;
 				}
 			}
